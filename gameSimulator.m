@@ -51,5 +51,13 @@ end
 r= [1:1:12];
 figure(1)
 plot(r,us.value,r,opp.value)
+title('Value Gained Over Each Round');
+xlabel("Round");
+ylabel("Value");
+legend("Our Value","Opponents Value");
 figure(2)
 plot(r,us.spent,r,opp.value)
+title('Money Spent Over Each Round');
+xlabel("Round");
+ylabel("Spending");
+legend("Our Spending","Opponents Spending");
