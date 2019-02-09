@@ -6,6 +6,6 @@ function actor = normalActor(categories,budget)
     % budget - the budget of the actor for this particular game
     actor.attack_weight = 1;
     actor.defense_weight = 1;
-    actor.category_weights = ones(20);
-    actor.budget = 10000000;
+    actor.category_weights = ones(categories);
+    actor.budget = budget;
     actor.spent = 0;
