@@ -26,7 +26,7 @@ function [newMarket, newState] = updateMarket(market, services, state)
             newMarket(j).cvss = market(i).cvss;
             newMarket(j).service = market(i).service;
             newMarket(j).price = market(i).price;
-            newMarket(j).purchased = market(i).puchased;
+            newMarket(j).purchased = market(i).purchased;
             j = j + 1;
         end
     end
