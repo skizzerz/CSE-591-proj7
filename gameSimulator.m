@@ -3,34 +3,43 @@
 rounds = 12;
 num_svc = 20;
 budget = 1000000;
-avgVal = 0.2200; % average value of a vulnerability
-eMonth = budget / 12 * avgVal;
+avgVal = 0.2; % average value of a vulnerability
+%eMonth = budget / 12 * avgVal;
+eMonth = avgVal;
 [services, market, state] = initialize(num_svc, 1);
 us = normalActor(num_svc, budget);
 opp = normalActor(num_svc, budget);
 
 for r = 1:rounds
-    r
+    bu = 0;
+    bo = 0;
     % buy some vulns; we go first
     [purchased, value, us, market] = purchase(us, 0, services, market);
-    value
     while isstruct(purchased)
+         bu = bu + 1;
          eFuture = calculateFutureValue(eMonth, rounds - r, us);
+         dbg.efuture = eFuture;
+         dbg.budget = us.budget;
+         dbg.spent = us.spent;
+         dbg.value = value;
+         dbg
          [purchased, value, us, market] = purchase(us, eFuture, services, market);
-         value
     end
     
     % now our opponent goes
     [purchased, value, opp, market] = purchase(opp, 0, services, market);
-    value
     while isstruct(purchased)
+         bo = bo + 1;
          eFuture = calculateFutureValue(eMonth, rounds - r, opp);
          [purchased, value, opp, market] = purchase(opp, eFuture, services, market);
-         value
     end
+    [r, bu, bo]
     
-    % finally update market state
+    % finally update market state and reset spent
     [market, state] = updateMarket(market, services, state);
+    us.spent = 0;
+    opp.spent = 0;
+
     % players purchasing logic here
     % possibly may involve modifying the existing vuln list
     % this modified list will then be updated prior to starting
