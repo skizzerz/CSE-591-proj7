@@ -2,10 +2,12 @@
 
 rounds = 12;
 num_svc = 20;
+budget = 1000000;
+avgVal = 0.2200; % average value of a vulnerability
+eMonth = budget / 12 * avgVal;
 [services, market, state] = initialize(num_svc, 1);
-us = normalActor(num_svc, 10000000);
-opp = normalActor(num_svc, 10000000);
-eMonth = 10; % TODO: calculate this appropriately
+us = normalActor(num_svc, budget);
+opp = normalActor(num_svc, budget);
 
 for r = 1:rounds
     r

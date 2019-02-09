@@ -14,8 +14,9 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eFut
         % value is higher than eFuture. Purchasing removes the vuln from
         % the market.
         svc = market(i).service;
-        atkVal = calculateValue(atkWgt, market(i).cvss, catWgts(svc), services(svc).popularity);
-        defVal = calculateValue(defWgt, market(i).cvss, catWgts(svc), services(svc).popularity);
+        impact = services(svc).popularity * 1000;
+        atkVal = calculateValue(atkWgt, market(i).cvss, catWgts(svc), impact) / market(i).price;
+        defVal = calculateValue(defWgt, market(i).cvss, catWgts(svc), impact) / market(i).price;
         val = max(atkVal, defVal);
         if val > bestVal && market(i).price <= budget && market(i).purchased == 0
             bestVal = val;
