@@ -1,9 +1,10 @@
 % Purchases a single vulnerability, if its value is better than our future
 % value. Otherwise doesn't purchase anything (check if purchased == 0).
-function [purchased, newActor, newMarket] = purchase(actor, eFuture, services, market)
+function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eFuture, services, market)
     bestVal = 0;
     bestIdx = 0;
     purchased = 0;
+    purchasedValue = 0;
     budget = actor.budget;
     atkWgt = actor.attack_weight;
     defWgt = actor.defense_weight;
@@ -27,6 +28,7 @@ function [purchased, newActor, newMarket] = purchase(actor, eFuture, services, m
         actor.budget = actor.budget - market(bestIdx).price;
         actor.spent = market(bestIdx).price;
         purchased = market(bestIdx);
+        purchasedValue = bestVal;
     end
     
     newMarket = market;
