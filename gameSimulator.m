@@ -4,21 +4,21 @@ rounds = 12;
 num_svc = 20;
 [services, market, state] = initialize(num_svc, 1);
 us = normalActor(num_svc, 10000000);
-op = normalActor(num_svc, 10000000);
+opp = normalActor(num_svc, 10000000);
 eMonth = 100; % TODO: calculate this appropriately
 
 for r = 1:rounds
     r
     % buy some vulns; we go first
     [purchased, us, market] = purchase(us, 0, services, market);
-    while purchased ~= 0
+    while isstruct(purchased)
          eFuture = calculateFutureValue(eMonth, rounds - r, us);
          [purchased, us, market] = purchase(us, eFuture, services, market);
     end
     
     % now our opponent goes
     [purchased, opp, market] = purchase(opp, 0, services, market);
-    while purchased ~= 0
+    while isstruct(purchased)
          eFuture = calculateFutureValue(eMonth, rounds - r, opp);
          [purchased, opp, market] = purchase(opp, eFuture, services, market);
     end
