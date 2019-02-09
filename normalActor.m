@@ -1,4 +1,4 @@
-function actor = normalActor(categories,budget)
+function actor = normalActor(categories,budget,r)
     % NORMALACTOR returns a structure of a really boring actors parameters
     %
     % categories - number of categories in this particular game
@@ -9,5 +9,6 @@ function actor = normalActor(categories,budget)
     actor.defense_weight = 1;
     actor.category_weights = ones(categories);
     actor.budget = budget;
-    actor.spent = 0;
-    actor.value = 0;
+    actor.spent = zeros(1,r);
+    actor.value = zeros(1,r);
+

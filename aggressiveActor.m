@@ -1,4 +1,4 @@
-function actor = aggressiveActor(categories,budget)
+function actor = aggressiveActor(categories,budget,r)
     % AGGRESSIVEATCOR returns a structure of a actor who prefers to attack
     % rather than defend
     %
@@ -10,5 +10,6 @@ function actor = aggressiveActor(categories,budget)
     actor.defense_weight = .5;
     actor.category_weights = ones(categories);
     actor.budget = budget;
-    actor.spent = 0;
-    actor.value = 0;
+    actor.spent = zeros(1,r);
+    actor.value = zeros(1,r);
+

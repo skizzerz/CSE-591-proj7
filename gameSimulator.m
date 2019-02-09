@@ -7,14 +7,14 @@ avgVal = 0.2; % average value of a vulnerability
 %eMonth = budget / 12 * avgVal;
 eMonth = avgVal;
 [services, market, state] = initialize(num_svc, 1);
-us = normalActor(num_svc, budget);
-opp = normalActor(num_svc, budget);
+us = normalActor(num_svc, budget, rounds);
+opp = normalActor(num_svc, budget, rounds);
 
 for r = 1:rounds
     bu = 0;
     bo = 0;
     % buy some vulns; we go first
-    [purchased, value, us, market] = purchase(us, 0, services, market);
+    [purchased, value, us, market] = purchase(us, 0, services, market,r);
     while isstruct(purchased)
          bu = bu + 1;
          eFuture = calculateFutureValue(eMonth, rounds - r, us);
@@ -23,24 +23,21 @@ for r = 1:rounds
          dbg.spent = us.spent;
          dbg.value = value;
          dbg
-         [purchased, value, us, market] = purchase(us, eFuture, services, market);
+         [purchased, value, us, market] = purchase(us, eFuture, services, market,r);
     end
     
     % now our opponent goes
-    [purchased, value, opp, market] = purchase(opp, 0, services, market);
+    [purchased, value, opp, market] = purchase(opp, 0, services, market,r);
     while isstruct(purchased)
          bo = bo + 1;
          eFuture = calculateFutureValue(eMonth, rounds - r, opp);
-         [purchased, value, opp, market] = purchase(opp, eFuture, services, market);
+         [purchased, value, opp, market] = purchase(opp, eFuture, services, market,r);
     end
     [r, bu, bo]
     
     % finally update market state and reset spent
     [market, state] = updateMarket(market, services, state);
-    us.spent = 0;
-    opp.spent = 0;
-    us.value = 0;
-    opp.value = 0;
+
 
     % players purchasing logic here
     % possibly may involve modifying the existing vuln list
@@ -50,8 +47,9 @@ for r = 1:rounds
     %vuln_uCell = struct2cell(vuln_u);
     % remove comment below to view output for eachround
     %vuln_uCell
-    figure(1)
-    plot(r,us.value,r,opp.value)
-    figure(2)
-    plot(r,us.spent,r,opp.value)
 end
+r= [1:1:12];
+figure(1)
+plot(r,us.value,r,opp.value)
+figure(2)
+plot(r,us.spent,r,opp.value)

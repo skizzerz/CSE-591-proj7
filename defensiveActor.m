@@ -1,4 +1,4 @@
-function actor = defensiveActor(categories,budget)
+function actor = defensiveActor(categories,budget,r)
     % DEFENSIVEACTOR returns a structure of an actor who prefers to defend
     % rather than attack
     %
@@ -10,5 +10,5 @@ function actor = defensiveActor(categories,budget)
     actor.defense_weight = 1.5;
     actor.category_weights = ones(categories);
     actor.budget = budget;
-    actor.spent = 0;
-    actor.value = 0;
+    actor.spent = zeros(1,r);
+    actor.value = zeros(1,r);

@@ -1,4 +1,4 @@
-function actor = selectiveActor(categories,budget)
+function actor = selectiveActor(categories,budget,r)
     % SELECTIVEACTOR returns a structure of an actor who randomly prefers
     % certain vulnerabilities and dislikes others
     %
@@ -10,5 +10,5 @@ function actor = selectiveActor(categories,budget)
     actor.defense_weight = 1;
     actor.category_weights = 2*rand(categories,1);
     actor.budget = budget;
-    actor.spent = 0;
-    actor.value = 0;
+    actor.spent = zeros(1,r);
+    actor.value = zeros(1,r);
