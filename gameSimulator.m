@@ -6,7 +6,7 @@ budget = 1000000;
 avgVal = 0.2; % average value of a vulnerability
 %eMonth = budget / 12 * avgVal;
 eMonth = avgVal;
-[services, market, state] = initialize(num_svc, 1);
+[services, market, state] = initialize(num_svc);
 us = normalActor(num_svc, budget, rounds);
 opp = normalActor(num_svc, budget, rounds);
 
@@ -55,6 +55,18 @@ legend("Our Value","Opponents Value");
 figure(2)
 plot(r,us.spent,r,opp.value)
 title('Money Spent Over Each Round');
+xlabel("Round");
+ylabel("Spending");
+legend("Our Spending","Opponents Spending");
+figure(3)
+plot(r,cumsum(us.value),r,cumsum(opp.value))
+title('Cumulative Value Gained Over Each Round');
+xlabel("Round");
+ylabel("Value");
+legend("Our Value","Opponents Value");
+figure(4)
+plot(r,cumsum(us.spent),r,cumsum(opp.value))
+title('Cumulative Money Spent Over Each Round');
 xlabel("Round");
 ylabel("Spending");
 legend("Our Spending","Opponents Spending");
