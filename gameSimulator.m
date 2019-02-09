@@ -49,7 +49,7 @@ for r = 1:rounds
     % remove comment below to view output for eachround
     %vuln_uCell
     figure(1)
-    plot(r,us.value,opp.value)
+    plot(r,us.value,r,opp.value)
     figure(2)
-    plot(r,us.spent,opp.value)
+    plot(r,us.spent,r,opp.value)
 end
