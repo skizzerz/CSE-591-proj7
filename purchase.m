@@ -27,7 +27,7 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eFut
     if bestIdx > 0 && bestVal > eFuture
         market(bestIdx).purchased = 1;
         actor.budget = actor.budget - market(bestIdx).price;
-        actor.spent = market(bestIdx).price;
+        actor.spent = actor.spent + market(bestIdx).price;
         purchased = market(bestIdx);
         purchasedValue = bestVal;
     end
