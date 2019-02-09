@@ -13,5 +13,5 @@ function [services, market, state] = initialize(numServices, seed)
     end
     
     % generate initial market
-    [market, state] = generateMarket(state);
+    [market, state] = generateMarket(services, state);
 end
