@@ -17,7 +17,7 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eFut
         atkVal = calculateValue(atkWgt, market(i).cvss, catWgts(svc), services(svc).popularity);
         defVal = calculateValue(defWgt, market(i).cvss, catWgts(svc), services(svc).popularity);
         val = max(atkVal, defVal);
-        if val > bestVal && market(i).price <= budget
+        if val > bestVal && market(i).price <= budget && market(i).purchased == 0
             bestVal = val;
             bestIdx = i;
         end
