@@ -53,7 +53,7 @@ xlabel("Round");
 ylabel("Value");
 legend("Our Value","Opponents Value");
 figure(2)
-plot(r,us.spent,r,opp.value)
+plot(r,us.spent,r,opp.spent)
 title('Money Spent Over Each Round');
 xlabel("Round");
 ylabel("Spending");
@@ -65,7 +65,7 @@ xlabel("Round");
 ylabel("Value");
 legend("Our Value","Opponents Value");
 figure(4)
-plot(r,cumsum(us.spent),r,cumsum(opp.value))
+plot(r,cumsum(us.spent),r,cumsum(opp.spent))
 title('Cumulative Money Spent Over Each Round');
 xlabel("Round");
 ylabel("Spending");
