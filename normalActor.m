@@ -10,3 +10,4 @@ function actor = normalActor(categories,budget)
     actor.category_weights = ones(categories);
     actor.budget = budget;
     actor.spent = 0;
+    actor.value = 0;

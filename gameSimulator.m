@@ -39,6 +39,8 @@ for r = 1:rounds
     [market, state] = updateMarket(market, services, state);
     us.spent = 0;
     opp.spent = 0;
+    us.value = 0;
+    opp.value = 0;
 
     % players purchasing logic here
     % possibly may involve modifying the existing vuln list

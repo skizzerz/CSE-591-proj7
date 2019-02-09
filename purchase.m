@@ -15,8 +15,8 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eFut
         % the market.
         svc = market(i).service;
         impact = services(svc).popularity * 1000;
-        atkVal = calculateValue(atkWgt, market(i).cvss, catWgts(svc), impact) / market(i).price;
-        defVal = calculateValue(defWgt, market(i).cvss, catWgts(svc), impact) / market(i).price;
+        atkVal = calculateValue(atkWgt, market(i).cvss, catWgts(svc), impact);
+        defVal = calculateValue(defWgt, market(i).cvss, catWgts(svc), impact);
         val = max(atkVal, defVal);
         if val > bestVal && market(i).price <= budget && market(i).purchased == 0
             bestVal = val;
@@ -24,12 +24,19 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eFut
         end
     end
     
-    if bestIdx > 0 && bestVal > eFuture
+    eVuln = 0;
+    if bestIdx > 0
+        eVuln = bestVal / market(bestIdx).price;
+    end
+    
+    if bestIdx > 0 && eVuln > eFuture
         market(bestIdx).purchased = 1;
-        actor.budget = actor.budget - market(bestIdx).price;
-        actor.spent = actor.spent + market(bestIdx).price;
         purchased = market(bestIdx);
-        purchasedValue = bestVal;
+        purchasedValue = eVuln;
+        
+        actor.budget = actor.budget - purchased.price;
+        actor.spent = actor.spent + purchased.price;
+        actor.value = actor.value + bestVal;
     end
     
     newMarket = market;

@@ -11,3 +11,4 @@ function actor = selectiveActor(categories,budget)
     actor.category_weights = 2*rand(categories,1);
     actor.budget = budget;
     actor.spent = 0;
+    actor.value = 0;
