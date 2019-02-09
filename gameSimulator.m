@@ -48,4 +48,8 @@ for r = 1:rounds
     %vuln_uCell = struct2cell(vuln_u);
     % remove comment below to view output for eachround
     %vuln_uCell
+    figure(1)
+    plot(r,us.value,opp.value)
+    figure(2)
+    plot(r,us.spent,opp.value)
 end
