@@ -5,6 +5,7 @@ function actor = aggressiveActor(categories,budget)
     % categories - number of categories in this particular game
     %
     % budget - the budget of the actor for this particular game
+    actor.save_weight = .8;
     actor.attack_weight = 1.5;
     actor.defense_weight = .5;
     actor.category_weights = ones(categories);
