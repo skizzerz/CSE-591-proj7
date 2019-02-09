@@ -24,9 +24,7 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eFut
         end
     end
     
-    % assume eFuture is the value of a vuln
-    futureVal = eFuture / actor.budget;
-    if bestIdx > 0 && bestVal > futureVal
+    if bestIdx > 0 && bestVal > eFuture
         market(bestIdx).purchased = 1;
         actor.budget = actor.budget - market(bestIdx).price;
         actor.spent = market(bestIdx).price;
