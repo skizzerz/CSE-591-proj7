@@ -12,5 +12,6 @@ function [market, newState] = generateMarket(services, state)
         market(i).cvss = cvss;
         market(i).service = service;
         market(i).price = price;
+        market(i).purchased = 0;
     end
 end

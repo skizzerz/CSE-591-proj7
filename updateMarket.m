@@ -16,15 +16,17 @@ function [newMarket, newState] = updateMarket(market, services, state)
             newMarket(j).cvss = cvss;
             newMarket(j).service = service;
             newMarket(j).price = price;
+            newMarket(j).purchased = 0;
             j = j + 1;
         end
         
-        if rand > rem
+        if rand > rem && market(i).purchased == 0
             % this means we are *not* removing the current element,
             % so copy it over to the returned list
             newMarket(j).cvss = market(i).cvss;
             newMarket(j).service = market(i).service;
             newMarket(j).price = market(i).price;
+            newMarket(j).purchased = market(i).puchased;
             j = j + 1;
         end
     end
