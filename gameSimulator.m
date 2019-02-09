@@ -14,25 +14,22 @@ for r = 1:rounds
     bu = 0;
     bo = 0;
     % buy some vulns; we go first
-    [purchased, value, us, market] = purchase(us, 0, services, market,r);
-    while isstruct(purchased)
-         bu = bu + 1;
-         eFuture = calculateFutureValue(eMonth, rounds - r, us);
-         dbg.efuture = eFuture;
-         dbg.budget = us.budget;
-         dbg.spent = us.spent;
-         dbg.value = value;
-         dbg
-         [purchased, value, us, market] = purchase(us, eFuture, services, market,r);
+    [usPurchased, usValue, us, market] = purchase(us, 0, services, market,r);
+    [oppPurchased, oppValue, opp, market] = purchase(opp, 0, services, market,r);
+    while isstruct(usPurchased) || isstruct(oppPurchased)
+        if isstruct(usPurchased)
+            bu = bu + 1;
+            eFuture = calculateFutureValue(eMonth, rounds - r, us);
+            [usPurchased, usValue, us, market] = purchase(us, eFuture, services, market,r);
+        end
+        
+        if isstruct(oppPurchased)
+            bo = bo + 1;
+            eFuture = calculateFutureValue(eMonth, rounds - r, opp);
+            [oppPurchased, oppValue, opp, market] = purchase(opp, eFuture, services, market,r);
+        end
     end
-    
-    % now our opponent goes
-    [purchased, value, opp, market] = purchase(opp, 0, services, market,r);
-    while isstruct(purchased)
-         bo = bo + 1;
-         eFuture = calculateFutureValue(eMonth, rounds - r, opp);
-         [purchased, value, opp, market] = purchase(opp, eFuture, services, market,r);
-    end
+
     [r, bu, bo]
     
     % finally update market state and reset spent
