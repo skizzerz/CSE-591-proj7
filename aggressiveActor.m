@@ -1,5 +1,5 @@
 function actor = aggressiveActor(categories,budget,r)
-    % AGGRESSIVEATCOR returns a structure of a actor who prefers to attack
+    % AGGRESSIVEACTOR returns a structure of a actor who prefers to attack
     % rather than defend
     %
     % categories - number of categories in this particular game

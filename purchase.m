@@ -15,20 +15,31 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eFut
         % the market.
         svc = market(i).service;
         impact = services(svc).popularity * 1000;
+        % calculate the attack and defense value of this vulnerability for
+        % our actor to purchase.
         atkVal = calculateValue(atkWgt, market(i).cvss, catWgts(svc), impact) / market(i).price;
         defVal = calculateValue(defWgt, market(i).cvss, catWgts(svc), impact) / market(i).price;
         val = max(atkVal, defVal);
+        % keep track of the vulnerability of the highest value. As long as
+        % that vulnerability is available for purchase and within our
+        % budget.
         if val > bestVal && market(i).price <= budget && market(i).purchased == 0
             bestVal = val;
             bestIdx = i;
         end
     end
     
+    % bestIdx is the index in which the highest valued vulnerability is
+    % held. If the value of that is greater than our expected future value
+    % then we purchase that vulnerability.
     if bestIdx > 0 && bestVal > eFuture
         market(bestIdx).purchased = 1;
         purchased = market(bestIdx);
         purchasedValue = bestVal;
-        
+        % Remove from the actor's budget the price of the vulnerability
+        % purchased. Add to the actor's spent value the price of the
+        % vulnerability purchased and increment the value the actor has
+        % received in the game by the value of the vulnerability purchased.
         actor.budget = actor.budget - purchased.price;
         actor.spent(r) = actor.spent(r)+ purchased.price;
         actor.value(r) = actor.value(r) + (bestVal * purchased.price);

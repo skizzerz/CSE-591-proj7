@@ -6,10 +6,14 @@ budget = 1000000;
 avgVal = 0.2; % average value of a vulnerability
 %eMonth = budget / 12 * avgVal;
 eMonth = avgVal;
+% call initialize to setup the initial game conditions
+% including the vulnerability market
 [services, market, state] = initialize(num_svc, 2);
+% initialize two actors using the normalActor function.
 us = normalActor(num_svc, budget, rounds);
 opp = normalActor(num_svc, budget, rounds);
 
+% Do the following for each round of the game
 for r = 1:rounds
     fprintf('ROUND %d\n', r);
     bu = 0;
@@ -40,16 +44,6 @@ for r = 1:rounds
     
     % finally update market state and reset spent
     [market, state] = updateMarket(market, services, state);
-
-
-    % players purchasing logic here
-    % possibly may involve modifying the existing vuln list
-    % this modified list will then be updated prior to starting
-    % the next round
-    %vuln_u = updateList(vuln, .05, .05, 1);
-    %vuln_uCell = struct2cell(vuln_u);
-    % remove comment below to view output for eachround
-    %vuln_uCell
 end
 r= [1:1:12];
 figure(1)
