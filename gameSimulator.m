@@ -8,7 +8,7 @@ avgVal = 0.2; % average value of a vulnerability
 eMonth = avgVal;
 % call initialize to setup the initial game conditions
 % including the vulnerability market
-[services, market, state] = initialize(num_svc, 2);
+[services, market, state] = initialize(num_svc, 3);
 % initialize two actors using the normalActor function.
 us = normalActor(num_svc, budget, rounds);
 opp = normalActor(num_svc, budget, rounds);
