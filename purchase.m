@@ -10,26 +10,31 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eMon
     atkWgt = actor.attack_weight;
     defWgt = actor.defense_weight;
     catWgts = actor.category_weights;
-    avgMarketPrice = mean([market.price]);
-    maxMarketPrice = max([market.price]);
-    % when inflating vulnerabilities, this is the maximum amount we inflate
-    % by.
-    clampFactor = 1.1 * avgMarketPrice / maxMarketPrice;
+    
     for i = 1:numel(market)
-        % select the vuln with the best value and buy it, as long as its
-        % value is higher than eFuture. Purchasing removes the vuln from
-        % the market.
         svc = market(i).service;
         impact = services(svc).popularity * 1000;
-        % calculate the attack and defense value of this vulnerability for
-        % our actor to purchase.
         atkVal = calculateValue(atkWgt, market(i).cvss, catWgts(svc), impact) / market(i).price;
         defVal = calculateValue(defWgt, market(i).cvss, catWgts(svc), impact) / market(i).price;
-        baseVal = max(atkVal, defVal);
+        values(i) = max(atkVal, defVal);
+    end
+    
+    avgMarketValue = mean(values);
+    maxMarketValue = max(values);
+    % when inflating vulnerabilities, this is the maximum amount we inflate
+    % by.
+    clampFactor = 1.1;
+    clamp = (clampFactor - 1)/(maxMarketValue/avgMarketValue - 1);
+    
+    % select the vuln with the best value and buy it, as long as its
+    % value is higher than eFuture. Purchasing removes the vuln from
+    % the market.
+    for i = 1:numel(market)
+        baseVal = values(i);
         % We overvalue more expensive vulns, because vuln authors are
         % usually good at pricing, so more expensive = more impact in
         % general.
-        inflatedVal = baseVal * clampFactor * market(i).price / avgMarketPrice;
+        inflatedVal = clamp * baseVal / avgMarketValue + 1 - clamp;
         % keep track of the vulnerability of the highest value. As long as
         % that vulnerability is available for purchase and within our
         % budget.
