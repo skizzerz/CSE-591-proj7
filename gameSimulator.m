@@ -52,20 +52,21 @@ fprintf('We purchased $%.2f of vulns for total value %.4f.\n', sum([opp.spent]),
 r= [1:1:12];
 figure(1)
 plot(r,us.value,r,opp.value)
-title('Value Gained Over Each Round');
-xlabel("Round");
+title('Value Gained Over Each Month');
+xlabel("Month");
 ylabel("Value");
 legend("Our Value","Opponents Value");
 % change the exponent to remove scientific notation
 ax = gca;
 ax.YAxis.Exponent = 0;
-ytickformat('usd')
+ytickformat('usd');
 xlim([1 12]);
+set(gca,'xtick',1:12,'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
 
 figure(2)
 plot(r,us.spent,r,opp.spent)
-title('Money Spent Over Each Round');
-xlabel("Round");
+title('Money Spent Over Each Month');
+xlabel("Month");
 ylabel("Spending");
 legend("Our Spending","Opponents Spending");
 % change the exponent to remove scientific notation
@@ -73,27 +74,30 @@ ax = gca;
 ax.YAxis.Exponent = 0;
 ytickformat('usd')
 xlim([1 12]);
+set(gca,'xtick',1:12,'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
 
 figure(3)
 plot(r,cumsum(us.value),r,cumsum(opp.value))
-title('Cumulative Value Gained Over Each Round');
-xlabel("Round");
+title('Cumulative Value Gained Over Each Month');
+xlabel("Month");
 ylabel("Value");
 legend("Our Value","Opponents Value");
 % change the exponent to remove scientific notation
 ax = gca;
 ax.YAxis.Exponent = 0;
-ytickformat('usd')
+ytickformat('usd');
 xlim([1 12]);
+set(gca,'xtick',1:12,'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'}); 
 
 figure(4)
 plot(r,cumsum(us.spent),r,cumsum(opp.spent))
-title('Cumulative Money Spent Over Each Round');
-xlabel("Round");
+title('Cumulative Money Spent Over Each Month');
+xlabel("Month");
 ylabel("Spending");
 legend("Our Spending","Opponents Spending");
 % change the exponent to remove scientific notation
 ax = gca;
 ax.YAxis.Exponent = 0;
-ytickformat('usd')
+ytickformat('usd');
 xlim([1 12]);
+set(gca,'xtick',1:12,'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
