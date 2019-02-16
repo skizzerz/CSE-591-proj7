@@ -11,5 +11,5 @@ function value = calculateFutureValue(e_month,month,actor,cost)
     save = actor.save_weight;
     budget = actor.budget;
     spent = actor.spent;
-    value = save*e_month/((budget+spent)/(month+1)/spent+cost);
+    value = save*e_month/((budget+spent)/(month+1)/(spent+cost));
     
