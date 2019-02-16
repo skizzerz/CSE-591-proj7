@@ -2,12 +2,14 @@
 % 5% chance of going away, and there is another 5% chance per entry to
 % generate a new vulnerability in the list for that service.
 function [newMarket, newState] = updateMarket(market, services, state)
-    add = 0.05;
+    add = 0.15;
     rem = 0.05;
     rng(state);
     
     j = 1;
     numServices = numel(services);
+    newMarket = market;
+    newState = state;
     for i = 1:numel(market)
         if rand < add
             cvss = randi(100) / 10;

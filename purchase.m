@@ -1,6 +1,6 @@
 % Purchases a single vulnerability, if its value is better than our future
 % value. Otherwise doesn't purchase anything (check if purchased == 0).
-function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eMonth, services, market,r,rounds)
+function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eMonth, services, market, rnd, roundsPerLoop)
     bestInflatedVal = 0;
     bestBaseVal = 0;
     bestIdx = 0;
@@ -44,13 +44,16 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eMon
             bestIdx = i;
         end
     end
-    input = rounds - r;
+    r = mod(rnd - 1, roundsPerLoop) + 1;
+    input = roundsPerLoop - r;
     if bestIdx ~= 0
-        eFuture = calculateFutureValue(eMonth,input,actor,market(bestIdx).price);
+        eFuture = calculateFutureValue(eMonth, rnd, input, actor, market(bestIdx).price);
+        fprintf('eFuture = %.4f; value = %.4f\n', eFuture, bestBaseVal);
     end
     % bestIdx is the index in which the highest valued vulnerability is
     % held. If the value of that is greater than our expected future value
     % then we purchase that vulnerability.
+
     if bestIdx > 0 && bestBaseVal > eFuture
         market(bestIdx).purchased = 1;
         purchased = market(bestIdx);
@@ -60,8 +63,8 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eMon
         % vulnerability purchased and increment the value the actor has
         % received in the game by the value of the vulnerability purchased.
         actor.budget = actor.budget - purchased.price;
-        actor.spent(r) = actor.spent(r)+ purchased.price;
-        actor.value(r) = actor.value(r) + (bestBaseVal * purchased.price);
+        actor.spent(rnd) = actor.spent(rnd) + purchased.price;
+        actor.value(rnd) = actor.value(rnd) + (bestBaseVal * purchased.price);
     end
     
     newMarket = market;
