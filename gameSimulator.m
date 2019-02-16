@@ -60,6 +60,7 @@ legend("Our Value","Opponents Value");
 ax = gca;
 ax.YAxis.Exponent = 0;
 ytickformat('usd')
+xlim([1 12]);
 
 figure(2)
 plot(r,us.spent,r,opp.spent)
@@ -71,6 +72,7 @@ legend("Our Spending","Opponents Spending");
 ax = gca;
 ax.YAxis.Exponent = 0;
 ytickformat('usd')
+xlim([1 12]);
 
 figure(3)
 plot(r,cumsum(us.value),r,cumsum(opp.value))
@@ -82,6 +84,7 @@ legend("Our Value","Opponents Value");
 ax = gca;
 ax.YAxis.Exponent = 0;
 ytickformat('usd')
+xlim([1 12]);
 
 figure(4)
 plot(r,cumsum(us.spent),r,cumsum(opp.spent))
@@ -93,3 +96,4 @@ legend("Our Spending","Opponents Spending");
 ax = gca;
 ax.YAxis.Exponent = 0;
 ytickformat('usd')
+xlim([1 12]);
