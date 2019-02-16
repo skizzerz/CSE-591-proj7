@@ -60,6 +60,7 @@ legend("Our Value","Opponents Value");
 ax = gca;
 ax.YAxis.Exponent = 0;
 xlim([1 12]);
+ylim([0 inf]);
 set(gca,'xtick',1:12,'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
 
 figure(2)
@@ -73,6 +74,7 @@ ax = gca;
 ax.YAxis.Exponent = 0;
 ytickformat('usd')
 xlim([1 12]);
+ylim([0 inf]);
 set(gca,'xtick',1:12,'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
 
 figure(3)
@@ -85,6 +87,7 @@ legend("Our Value","Opponents Value");
 ax = gca;
 ax.YAxis.Exponent = 0;
 xlim([1 12]);
+ylim([0 inf]);
 set(gca,'xtick',1:12,'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'}); 
 
 figure(4)
@@ -98,4 +101,5 @@ ax = gca;
 ax.YAxis.Exponent = 0;
 ytickformat('usd');
 xlim([1 12]);
+ylim([0 inf]);
 set(gca,'xtick',1:12,'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
