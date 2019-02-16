@@ -2,14 +2,17 @@
 
 rounds = 24;
 roundsPerLoop = 12; % budget refreshes after this many rounds
-num_svc = 20;
+num_svc = 20; % number of different services that there are vulns for
+num_vulns = 200; % how big the market is to start out
+add_vulns = 30; % how many vulns to add to market each refresh
+remove_chance = 0.05; % how likely we are to remove a vuln from the market each refresh
 ourBudget = 1000000;
 oppBudget = 1000000;
 
 eMonth = 0.2; % average value of a vulnerability
 % call initialize to setup the initial game conditions
 % including the vulnerability market
-[services, market, state] = initialize(num_svc);
+[services, market, state] = initialize(num_svc, num_vulns);
 % initialize two actors using the normalActor function.
 us = normalActor(num_svc, ourBudget, rounds);
 opp = normalActor(num_svc, oppBudget, rounds);
@@ -51,7 +54,7 @@ for rnd = 1:rounds
     fprintf('\n\n===============\n');
     
     % finally update market state and reset spent
-    [market, state] = updateMarket(market, services, state);
+    [market, state] = updateMarket(market, services, add_vulns, remove_chance, state);
 end
 fprintf('---------------\n');
 fprintf('We purchased $%.2f of vulns for total value %.4f.\n', sum([us.spent]),sum([us.value]));

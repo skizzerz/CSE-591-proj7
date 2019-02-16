@@ -1,6 +1,6 @@
-function [services, market, state] = initialize(numServices, seed)
+function [services, market, state] = initialize(numServices, numVulns, seed)
     % RNG state for repeatable results across runs
-    if nargin > 1
+    if nargin > 2
         rng(seed);
     else
         rng('shuffle');
@@ -18,5 +18,5 @@ function [services, market, state] = initialize(numServices, seed)
     end
     
     % generate initial market
-    [market, state] = generateMarket(services, state);
+    [market, state] = generateMarket(services, numVulns, state);
 end
