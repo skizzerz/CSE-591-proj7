@@ -25,15 +25,15 @@ for r = 1:rounds
         if isstruct(usPurchased)
             bu = bu + 1;
             fprintf('We purchased vuln with value/$ %.4f for $%.2f.\n', usValue, usPurchased.price);
-            eFuture = calculateFutureValue(eMonth, rounds - r, us);
-            [usPurchased, usValue, us, market] = purchase(us, eFuture, services, market,r);
+            %eFuture = calculateFutureValue(eMonth, rounds - r, us);
+            [usPurchased, usValue, us, market] = purchase(us, eMonth, services, market,r,rounds);
         end
         
         if isstruct(oppPurchased)
             bo = bo + 1;
             fprintf('Opponent purchased vuln with value/$ %.4f for $%.2f.\n', oppValue, oppPurchased.price);
-            eFuture = calculateFutureValue(eMonth, rounds - r, opp);
-            [oppPurchased, oppValue, opp, market] = purchase(opp, eFuture, services, market,r);
+            %eFuture = calculateFutureValue(eMonth, rounds - r, opp);
+            [oppPurchased, oppValue, opp, market] = purchase(opp, eMonth, services, market,r,rounds);
         end
     end
 

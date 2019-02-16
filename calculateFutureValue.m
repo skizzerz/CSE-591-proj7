@@ -1,4 +1,4 @@
-function value = calculateFutureValue(e_month,month,actor)
+function value = calculateFutureValue(e_month,month,actor,cost)
     % CALCULATEFUTUREVALUE caluculates the expected value of saving money
     % for the next round of the simulation
     %
@@ -11,5 +11,5 @@ function value = calculateFutureValue(e_month,month,actor)
     save = actor.save_weight;
     budget = actor.budget;
     spent = actor.spent;
-    value = save*e_month/((budget+spent)/(month+1)/spent);
+    value = save*e_month/((budget+spent)/(month+1)/spent+cost);
     

@@ -1,6 +1,6 @@
 % Purchases a single vulnerability, if its value is better than our future
 % value. Otherwise doesn't purchase anything (check if purchased == 0).
-function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eFuture, services, market,r)
+function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eMonth, services, market,r,rounds)
     bestInflatedVal = 0;
     bestBaseVal = 0;
     bestIdx = 0;
@@ -39,7 +39,9 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eFut
             bestIdx = i;
         end
     end
-    
+    if bestIdx ~= 0
+        eFuture = calculateFutureValue(eMonth,r,actor,market(bestIdx).price);
+    end
     % bestIdx is the index in which the highest valued vulnerability is
     % held. If the value of that is greater than our expected future value
     % then we purchase that vulnerability.
