@@ -52,21 +52,40 @@ title('Value Gained Over Each Round');
 xlabel("Round");
 ylabel("Value");
 legend("Our Value","Opponents Value");
+% change the exponent to remove scientific notation
+ax = gca;
+ax.YAxis.Exponent = 0;
+ytickformat('usd')
+
 figure(2)
 plot(r,us.spent,r,opp.spent)
 title('Money Spent Over Each Round');
 xlabel("Round");
 ylabel("Spending");
 legend("Our Spending","Opponents Spending");
+% change the exponent to remove scientific notation
+ax = gca;
+ax.YAxis.Exponent = 0;
+ytickformat('usd')
+
 figure(3)
 plot(r,cumsum(us.value),r,cumsum(opp.value))
 title('Cumulative Value Gained Over Each Round');
 xlabel("Round");
 ylabel("Value");
 legend("Our Value","Opponents Value");
+% change the exponent to remove scientific notation
+ax = gca;
+ax.YAxis.Exponent = 0;
+ytickformat('usd')
+
 figure(4)
 plot(r,cumsum(us.spent),r,cumsum(opp.spent))
 title('Cumulative Money Spent Over Each Round');
 xlabel("Round");
 ylabel("Spending");
 legend("Our Spending","Opponents Spending");
+% change the exponent to remove scientific notation
+ax = gca;
+ax.YAxis.Exponent = 0;
+ytickformat('usd')
