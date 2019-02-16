@@ -19,8 +19,8 @@ for r = 1:rounds
     bu = 0;
     bo = 0;
     % buy some vulns; we go first
-    [usPurchased, usValue, us, market] = purchase(us, 0, services, market,r);
-    [oppPurchased, oppValue, opp, market] = purchase(opp, 0, services, market,r);
+    [usPurchased, usValue, us, market] = purchase(us, 0, services, market,r,rounds);
+    [oppPurchased, oppValue, opp, market] = purchase(opp, 0, services, market,r,rounds);
     while isstruct(usPurchased) || isstruct(oppPurchased)
         if isstruct(usPurchased)
             bu = bu + 1;

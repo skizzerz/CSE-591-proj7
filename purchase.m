@@ -14,7 +14,7 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eMon
     maxMarketPrice = max([market.price]);
     % when inflating vulnerabilities, this is the maximum amount we inflate
     % by.
-    clampFactor = 1.2 * avgMarketPrice / maxMarketPrice;
+    clampFactor = 1.1 * avgMarketPrice / maxMarketPrice;
     for i = 1:numel(market)
         % select the vuln with the best value and buy it, as long as its
         % value is higher than eFuture. Purchasing removes the vuln from
@@ -39,8 +39,9 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eMon
             bestIdx = i;
         end
     end
+    input = rounds - r;
     if bestIdx ~= 0
-        eFuture = calculateFutureValue(eMonth,r,actor,market(bestIdx).price);
+        eFuture = calculateFutureValue(eMonth,input,actor,market(bestIdx).price);
     end
     % bestIdx is the index in which the highest valued vulnerability is
     % held. If the value of that is greater than our expected future value
