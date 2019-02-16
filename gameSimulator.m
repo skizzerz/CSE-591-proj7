@@ -56,9 +56,8 @@ for rnd = 1:rounds
     % finally update market state and reset spent
     [market, state] = updateMarket(market, services, add_vulns, remove_chance, state);
 end
-fprintf('---------------\n');
 fprintf('We purchased $%.2f of vulns for total value %.4f.\n', sum([us.spent]),sum([us.value]));
-fprintf('We purchased $%.2f of vulns for total value %.4f.\n', sum([opp.spent]),sum([opp.value]));
+fprintf('Opponent purchased $%.2f of vulns for total value %.4f.\n', sum([opp.spent]),sum([opp.value]));
 
 numIters = rounds / roundsPerLoop;
 totBudget = max([us.total_budget opp.total_budget]) * numIters;
