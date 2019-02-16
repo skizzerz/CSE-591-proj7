@@ -55,7 +55,7 @@ plot(r,us.value,r,opp.value)
 title('Value Gained Over Each Month');
 xlabel("Month");
 ylabel("Value");
-legend("Our Value","Opponents Value");
+legend("Our Value","Opponents Value",'Location','southeast');
 % change the exponent to remove scientific notation
 ax = gca;
 ax.YAxis.Exponent = 0;
@@ -68,7 +68,7 @@ plot(r,us.spent,r,opp.spent)
 title('Money Spent Over Each Month');
 xlabel("Month");
 ylabel("Spending");
-legend("Our Spending","Opponents Spending");
+legend("Our Spending","Opponents Spending",'Location','southeast');
 % change the exponent to remove scientific notation
 ax = gca;
 ax.YAxis.Exponent = 0;
@@ -82,7 +82,7 @@ plot(r,cumsum(us.value),r,cumsum(opp.value))
 title('Cumulative Value Gained Over Each Month');
 xlabel("Month");
 ylabel("Value");
-legend("Our Value","Opponents Value");
+legend("Our Value","Opponents Value",'Location','southeast');
 % change the exponent to remove scientific notation
 ax = gca;
 ax.YAxis.Exponent = 0;
@@ -95,11 +95,11 @@ plot(r,cumsum(us.spent),r,cumsum(opp.spent))
 title('Cumulative Money Spent Over Each Month');
 xlabel("Month");
 ylabel("Spending");
-legend("Our Spending","Opponents Spending");
+legend("Our Spending","Opponents Spending",'Location','southeast');
 % change the exponent to remove scientific notation
 ax = gca;
 ax.YAxis.Exponent = 0;
 ytickformat('usd');
 xlim([1 12]);
-ylim([0 inf]);
+ylim([0 1000000]);
 set(gca,'xtick',1:12,'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
