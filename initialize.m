@@ -1,8 +1,13 @@
 function [services, market, state] = initialize(numServices, seed)
     % RNG state for repeatable results across runs
     if nargin > 1
+        rng(seed);
+    else
+        rng('shuffle');
+        seed = randi(intmax);
         rng(seed)
     end
+    fprintf('Seeding with %d\n', seed);
     state = rng;
     
     for i = 1:numServices

@@ -8,6 +8,7 @@ function actor = normalActor(categories,budget,r)
     actor.attack_weight = 1;
     actor.defense_weight = 1;
     actor.category_weights = ones(categories);
+    actor.total_budget = budget;
     actor.budget = budget;
     actor.spent = zeros(1,r);
     actor.value = zeros(1,r);

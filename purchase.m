@@ -48,7 +48,7 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eMon
     input = roundsPerLoop - r;
     if bestIdx ~= 0
         eFuture = calculateFutureValue(eMonth, rnd, input, actor, market(bestIdx).price);
-        fprintf('eFuture = %.4f; value = %.4f\n', eFuture, bestBaseVal);
+        %fprintf('eFuture = %.4f; value = %.4f\n', eFuture, bestBaseVal);
     end
     % bestIdx is the index in which the highest valued vulnerability is
     % held. If the value of that is greater than our expected future value

@@ -3,27 +3,25 @@
 rounds = 24;
 roundsPerLoop = 12; % budget refreshes after this many rounds
 num_svc = 20;
-budget = 1000000;
-avgVal = 0.2; % average value of a vulnerability
-numIters = rounds / roundsPerLoop;
-totBudget = budget * numIters;
-%eMonth = budget / 12 * avgVal;
-eMonth = avgVal;
+ourBudget = 1000000;
+oppBudget = 1000000;
+
+eMonth = 0.2; % average value of a vulnerability
 % call initialize to setup the initial game conditions
 % including the vulnerability market
 [services, market, state] = initialize(num_svc);
 % initialize two actors using the normalActor function.
-us = normalActor(num_svc, budget, rounds);
-opp = normalActor(num_svc, budget, rounds);
+us = normalActor(num_svc, ourBudget, rounds);
+opp = normalActor(num_svc, oppBudget, rounds);
 
 % Do the following for each round of the game
 for rnd = 1:rounds
     fprintf('ROUND %d\n', rnd);
     
     if mod(rnd - 1, roundsPerLoop) == 0
-        fprintf('NEW ITERATION: RESET BUDGET TO %d\n', budget)
-        us.budget = budget;
-        opp.budget = budget;
+        fprintf('NEW ITERATION: RESET BUDGETS\n')
+        us.budget = us.total_budget;
+        opp.budget = opp.total_budget;
     end
     
     bu = 0;
@@ -58,6 +56,9 @@ end
 fprintf('---------------\n');
 fprintf('We purchased $%.2f of vulns for total value %.4f.\n', sum([us.spent]),sum([us.value]));
 fprintf('We purchased $%.2f of vulns for total value %.4f.\n', sum([opp.spent]),sum([opp.value]));
+
+numIters = rounds / roundsPerLoop;
+totBudget = max([us.total_budget opp.total_budget]) * numIters;
 
 r = [1:1:rounds];
 figure(1)
