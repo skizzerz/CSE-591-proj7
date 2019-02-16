@@ -9,6 +9,7 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eFut
     atkWgt = actor.attack_weight;
     defWgt = actor.defense_weight;
     catWgts = actor.category_weights;
+    avgMarketPrice = mean([market.price]);
     for i = 1:numel(market)
         % select the vuln with the best value and buy it, as long as its
         % value is higher than eFuture. Purchasing removes the vuln from
@@ -19,7 +20,7 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eFut
         % our actor to purchase.
         atkVal = calculateValue(atkWgt, market(i).cvss, catWgts(svc), impact) / market(i).price;
         defVal = calculateValue(defWgt, market(i).cvss, catWgts(svc), impact) / market(i).price;
-        val = max(atkVal, defVal)*(market(i).price/22206.21);
+        val = max(atkVal, defVal)*(market(i).price / avgMarketPrice);
         % keep track of the vulnerability of the highest value. As long as
         % that vulnerability is available for purchase and within our
         % budget.
