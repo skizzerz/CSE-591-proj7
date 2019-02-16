@@ -59,7 +59,6 @@ legend("Our Value","Opponents Value");
 % change the exponent to remove scientific notation
 ax = gca;
 ax.YAxis.Exponent = 0;
-ytickformat('usd');
 xlim([1 12]);
 set(gca,'xtick',1:12,'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
 
@@ -85,7 +84,6 @@ legend("Our Value","Opponents Value");
 % change the exponent to remove scientific notation
 ax = gca;
 ax.YAxis.Exponent = 0;
-ytickformat('usd');
 xlim([1 12]);
 set(gca,'xtick',1:12,'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'}); 
 
