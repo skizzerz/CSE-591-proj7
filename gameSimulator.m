@@ -14,8 +14,8 @@ eMonth = 0.2; % average value of a vulnerability
 % including the vulnerability market
 [services, market, state] = initialize(num_svc, num_vulns);
 % initialize two actors using the normalActor function.
-us = normalActor(num_svc, ourBudget, rounds);
-opp = normalActor(num_svc, oppBudget, rounds);
+us = aggressiveActor(num_svc, ourBudget, rounds);
+opp = defensiveActor(num_svc, oppBudget, rounds);
 
 % Do the following for each round of the game
 for rnd = 1:rounds
@@ -61,7 +61,7 @@ fprintf('Opponent purchased $%.2f of vulns for total value %.4f.\n', sum([opp.sp
 
 numIters = rounds / roundsPerLoop;
 totBudget = max([us.total_budget opp.total_budget]) * numIters;
-
+%{
 r = [1:1:rounds];
 figure(1)
 plot(r, us.value, r, opp.value)
@@ -116,3 +116,4 @@ ytickformat('usd');
 xlim([1 rounds]);
 ylim([0 totBudget]);
 set(gca,'xtick',1:rounds,'xticklabel',{'Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'});
+%}
