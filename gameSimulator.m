@@ -45,6 +45,10 @@ for r = 1:rounds
     % finally update market state and reset spent
     [market, state] = updateMarket(market, services, state);
 end
+fprintf('---------------\n');
+fprintf('We purchased $%.2f of vulns for total value %.4f.\n', sum([us.spent]),sum([us.value]));
+fprintf('We purchased $%.2f of vulns for total value %.4f.\n', sum([opp.spent]),sum([opp.value]));
+
 r= [1:1:12];
 figure(1)
 plot(r,us.value,r,opp.value)

@@ -19,7 +19,7 @@ function [purchased, purchasedValue, newActor, newMarket] = purchase(actor, eFut
         % our actor to purchase.
         atkVal = calculateValue(atkWgt, market(i).cvss, catWgts(svc), impact) / market(i).price;
         defVal = calculateValue(defWgt, market(i).cvss, catWgts(svc), impact) / market(i).price;
-        val = max(atkVal, defVal);
+        val = max(atkVal, defVal)*(market(i).price/22206.21);
         % keep track of the vulnerability of the highest value. As long as
         % that vulnerability is available for purchase and within our
         % budget.
