@@ -1,6 +1,7 @@
 from sympy import *
 from sympy import Matrix
 
+# Table of Game Matrix
 # |-------------------------------------------------------------------------------------|
 # |     |          N          |              A              |             B             |
 # |-------------------------------------------------------------------------------------|
@@ -62,17 +63,36 @@ def NE_calculator(U1, U2, C1, C2, A1, A2, D1, D2):
     # E(Nop) = E(Att), E(Nop) = E(Bot)
     A1 = Matrix([[NN2 - NA2 - BN2 + BA2, AN2 - AA2 - BN2 + BA2], [NN2 - NB2 - BN2 + BB2, AN2 - AB2 - BN2 + BB2]])
     B1 = Matrix([[BA2 - BN2], [BB2 - BN2]])
-    print A1.inv() * B1
+    res1 = A1.inv() * B1
+    try:
+        isFloat = true
+        Pn1 = res1[0, 0]
+        Pa1 = res1[1, 0]
+        float(Pn1)
+        float(Pa1)
+        Pb1 = 1 - Pn1 - Pa1
+        print "For Player1, mixed Strategy is: "
+        print "No-op: " + str(Pn1) + ", Attack: " + str(Pa1) + ", Both: " + str(Pb1) + "\n"
+    except TypeError:
+        isFloat = false
+        print "In symbol calculation for player1, Case1: "
+        print "No-op: " + str(res1[0, 0]) + ", Attack: " + str(res1[1, 0]) + "\n"
 
     # E(Nop) = E(Att), E(Att) = E(Bot)
     A2 = Matrix([[NN2 - NA2 - BN2 + BA2, AN2 - AA2 - BN2 + BA2], [NA2 - NB2 - BA2 + BB2, AA2 - AB2 - BA2 + BB2]])
     B2 = Matrix([[BA2 - BN2], [BB2 - BA2]])
-    print A2.inv() * B2
+    res2 = A2.inv() * B2
+    if not isFloat:
+        print "In symbol calculation for player1, Case2: "
+        print "No-op: " + str(res2[0, 0]) + ", Attack: " + str(res2[1, 0]) + "\n"
 
     # E(Nop) = E(Bot), E(Att) = E(Bot)
     A3 = Matrix([[NN2 - NB2 - BN2 + BB2, AN2 - AB2 - BN2 + BB2], [NA2 - NB2 - BA2 + BB2, AA2 - AB2 - BA2 + BB2]])
     B3 = Matrix([[BB2 - BN2], [BB2 - BA2]])
-    print A3.inv() * B3
+    res3 = A3.inv() * B3
+    if not isFloat:
+        print "In symbol calculation for player1, Case3: "
+        print "No-op: " + str(res3[0, 0]) + ", Attack: " + str(res3[1, 0]) + "\n"
 
     # Actions for P2, E for P1
     # E(Nop) = NN1 * Pn + NA1 * Pa + NB1 * (1 - Pn - Pa)
@@ -100,19 +120,39 @@ def NE_calculator(U1, U2, C1, C2, A1, A2, D1, D2):
     # E(Nop) = E(Att), E(Nop) = E(Bot)
     A4 = Matrix([[NN1 - AN1 - NB1 + AB1, NA1 - AA1 - NB1 + AB1], [NN1 - BN1 - NB1 + BB1, NA1 - BA1 - NB1 + BB1]])
     B4 = Matrix([[AB1 - NB1], [BB1 - NB1]])
-    print A4.inv() * B4
+    res4 = A4.inv() * B4
+    if isFloat:
+        Pn4 = res4[0, 0]
+        Pa4 = res4[1, 0]
+        float(Pn4)
+        float(Pa4)
+        Pb4 = 1 - Pn4 - Pa4
+        print "For Player2, mixed Strategy is: "
+        print "No-op: " + str(Pn4) + ", Attack: " + str(Pa4) + ", Both: " + str(Pb4) + "\n"
+    else:
+        print "In symbol calculation for player2, Case1: "
+        print "No-op: " + str(res4[0, 0]) + ", Attack: " + str(res4[1, 0]) + "\n"
 
     # E(Nop) = E(Att), E(Att) = E(Bot)
     A5 = Matrix([[NN1 - AN1 - NB1 + AB1, NA1 - AA1 - NB1 + AB1], [AN1 - BN1 - AB1 + BB1, AA1 - BA1 - AB1 + BB1]])
     B5 = Matrix([[AB1 - NB1], [BB1 - AB1]])
-    print A5.inv() * B5
+    res5 = A5.inv() * B5
+    if not isFloat:
+        print "In symbol calculation for player2, Case2: "
+        print "No-op: " + str(res5[0, 0]) + ", Attack: " + str(res5[1, 0]) + "\n"
 
     # E(Nop) = E(Bot), E(Att) = E(Bot)
     A6 = Matrix([[NN1 - BN1 - NB1 + BB1, NA1 - BA1 - NB1 + BB1], [AN1 - BN1 - AB1 + BB1, AA1 - BA1 - AB1 + BB1]])
     B6 = Matrix([[BB1 - NB1], [BB1 - AB1]])
-    print A6.inv() * B6
+    res6 = A6.inv() * B6
+    if not isFloat:
+        print "In symbol calculation for player2, Case3: "
+        print "No-op: " + str(res6[0, 0]) + ", Attack: " + str(res6[1, 0]) + "\n"
 
 if __name__== "__main__":
     u1, u2, c1, c2, a1, a2, d1, d2 = symbols('u1 u2 c1 c2 a1 a2 d1 d2')
-    #NE_calculator(u1, u2, c1, c2, a1, a2, d1, d2)
+    # Calculation with symbol
+    # NE_calculator(u1, u2, c1, c2, a1, a2, d1, d2)
+
+    # Calculation with value
     NE_calculator(1100, 1000, 750, 800, 125, 100, 400, 500)
