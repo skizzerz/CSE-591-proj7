@@ -27,6 +27,23 @@ def NE_calculator(U1, U2, C1, C2, A1, A2, D1, D2):
 
     # Define: d1 < u1 < c1 + d1, d2 < u2 < c2 + d2, u2 > c1 + a1, u1 > c2 + a2
     u1, u2, c1, c2, a1, a2, d1, d2 = symbols('u1 u2 c1 c2 a1 a2 d1 d2')
+    try:
+        float(U1)
+        float(U2)
+        float(C1)
+        float(C2)
+        float(A1)
+        float(A2)
+        float(D1)
+        float(D2)
+        isFloat = true
+        if (U1 >= C1 + D1) or (U1 <= D1) or (U2 >= C2 + D2) or (U2 <= D2) or (U2 <= C1 + A1) or (U1 <= C2 + A2):
+            print "Invalid Value"
+            print "Please follow below rules:"
+            print "d1 < u1 < c1 + d1 \nd2 < u2 < c2 + d2 \nu2 > c1 + a1 \nu1 > c2 + a2"
+            return
+    except TypeError:
+        isFloat = false
 
     u1 = U1
     u2 = U2
@@ -64,8 +81,7 @@ def NE_calculator(U1, U2, C1, C2, A1, A2, D1, D2):
     A1 = Matrix([[NN2 - NA2 - BN2 + BA2, AN2 - AA2 - BN2 + BA2], [NN2 - NB2 - BN2 + BB2, AN2 - AB2 - BN2 + BB2]])
     B1 = Matrix([[BA2 - BN2], [BB2 - BN2]])
     res1 = A1.inv() * B1
-    try:
-        isFloat = true
+    if isFloat:
         Pn1 = res1[0, 0]
         Pa1 = res1[1, 0]
         float(Pn1)
@@ -73,8 +89,7 @@ def NE_calculator(U1, U2, C1, C2, A1, A2, D1, D2):
         Pb1 = 1 - Pn1 - Pa1
         print "For Player1, mixed Strategy is: "
         print "No-op: " + str(Pn1) + ", Attack: " + str(Pa1) + ", Both: " + str(Pb1) + "\n"
-    except TypeError:
-        isFloat = false
+    else:
         print "In symbol calculation for player1, Case1: "
         print "No-op: " + str(res1[0, 0]) + ", Attack: " + str(res1[1, 0]) + "\n"
 
